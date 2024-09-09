@@ -1,6 +1,6 @@
 # IMDB-Trakt-Syncer Docker Edition
 
-This fork was created because of [a comment on reddit](https://www.reddit.com/r/selfhosted/comments/1fcofmy/comment/lm9qgkd/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button). The image can be way more optimized and such, but it works okay :).
+This fork was created because of [a comment on reddit](https://www.reddit.com/r/selfhosted/comments/1fcofmy/comment/lm9qgkd). The image can be way more optimized and such, but it works okay :).
 
 Hope this works for you! If there are any issues, please let me know by creating an issue.
 
@@ -33,7 +33,7 @@ services:
       - ./credentials.txt:/app/IMDBTraktSyncer/credentials.txt
     restart: unless-stopped
 ```
-4. Run the application fist without docker to generate the credentials.txt file. **Note that most of the settings need to be transferred from credentials.txt to the docker-compose.yml file.** This is because the tokens can change. So you credentials file looks like this:
+4. Run the original application first without docker to generate the credentials.txt file. (So on your local pc) **Note that most of the settings need to be transferred from credentials.txt to the docker-compose.yml file.** This is because the tokens can change. So you credentials file looks like this:
 ```json
 {
    "trakt_access_token": "[some random token]",
