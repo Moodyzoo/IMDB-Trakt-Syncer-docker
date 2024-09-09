@@ -30,7 +30,7 @@ services:
       - sync_reviews=y
       - remove_watched_from_watchlists=y
     volumes:
-      - ./credentials.txt:/app/IMDBTraktSyncer/credentials.txt
+      - ./credentials.txt:/app/credentials.txt
     restart: unless-stopped
 ```
 4. Run the original application first without docker to generate the credentials.txt file. (So on your local pc) **Note that most of the settings need to be transferred from credentials.txt to the docker-compose.yml file.** This is because the tokens can change. So you credentials file looks like this:

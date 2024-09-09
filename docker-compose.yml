@@ -13,5 +13,5 @@ services:
       - sync_reviews=y
       - remove_watched_from_watchlists=y
     volumes:
-      - ./credentials.txt:/app/IMDBTraktSyncer/credentials.txt
+      - ./credentials.txt:/app/credentials.txt
     restart: unless-stopped
