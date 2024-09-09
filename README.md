@@ -1,4 +1,63 @@
+# IMDB-Trakt-Syncer Docker Edition
+
+This fork was created because of [a comment on reddit](https://www.reddit.com/r/selfhosted/comments/1fcofmy/comment/lm9qgkd/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button). The image can be way more optimized and such, but it works okay :).
+
+Hope this works for you! If there are any issues, please let me know by creating an issue.
+
+## Running in Docker [THIS FORK]
+
+1. Ensure Docker and Docker Compose are installed.
+2. Create a new folder and navigate to it
+```
+mkdir imdb-trakt-syncer && cd imdb-trakt-syncer
+```
+3. Create a `docker-compose.yml` file with the following content:
+```yaml
+version: '3.8'
+
+services:
+  imdb-trakt-syncer:
+    image: ghcr.io/moodyzoo/imdb-trakt-syncer-docker
+    environment:
+      # Settings from credentials.txt
+      - trakt_client_id=[Your Trakt Client ID]
+      - trakt_client_secret=[Your Trakt Client Secret]
+      - imdb_username=[Your IMDb Username]
+      - imdb_password=[Your IMDb Password]
+      # Your settings
+      - sync_ratings=y
+      - sync_watchlist=y
+      - sync_reviews=y
+      - remove_watched_from_watchlists=y
+    volumes:
+      - ./credentials.txt:/app/IMDBTraktSyncer/credentials.txt
+    restart: unless-stopped
+```
+4. Run the application fist without docker to generate the credentials.txt file. **Note that most of the settings need to be transferred from credentials.txt to the docker-compose.yml file.** This is because the tokens can change. So you credentials file looks like this:
+```json
+{
+   "trakt_access_token": "[some random token]",
+   "trakt_refresh_token": "[also some random token]"
+}
+```
+
+
+5. Start the container!
+```bash
+docker compose up -d
+```
+
+6. Please please, check the logs to see if everything works correctly. If the configuration is wrong, it will throw an error and restart loop indefinitely.
+```bash
+docker compose logs -f
+```
+
+*The rest of the README is left untouched.*
+
 # IMDB-Trakt-Syncer
+
+This fork was created because of [a comment on reddit](https://www.reddit.com/r/selfhosted/comments/1fcofmy/comment/lm9qgkd/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button). The image can be way more optimized and such, but it works okay :).
+
 This Python script syncs user watchlist, ratings and reviews for Movies, TV Shows and Episodes both ways between [Trakt](https://trakt.tv/) and [IMDB](https://imdb.com/). Existing items will not be overwritten. Ratings, watchlist and comment/review sync are all optional. The user will be prompted to enter their settings and credentials on first run.
 
 The script is compatible with operating systems that support Python (v3.6 or later) and Chromedriver (Windows, Linux and Mac). If you're interested in syncing ratings between Trakt, Plex, IMDB, and TMDB, I recommend the following projects: [PlexTraktSync](https://github.com/Taxel/PlexTraktSync), [IMDB-Trakt-Syncer](https://github.com/RileyXX/IMDB-Trakt-Syncer), and [TMDB-Trakt-Syncer](https://github.com/RileyXX/TMDB-Trakt-Syncer). See below for my other [recommended projects](https://github.com/RileyXX/IMDB-Trakt-Syncer?tab=readme-ov-file#other-recommended-projects).
