@@ -4,10 +4,12 @@ services:
   imdb-trakt-syncer:
     image: ghcr.io/moodyzoo/imdb-trakt-syncer-docker
     environment:
+      # Settings from credentials.txt
       - trakt_client_id=[Your Trakt Client ID]
       - trakt_client_secret=[Your Trakt Client Secret]
       - imdb_username=[Your IMDb Username]
       - imdb_password=[Your IMDb Password]
+      # Your settings
       - sync_ratings=y
       - sync_watchlist=y
       - sync_reviews=y
